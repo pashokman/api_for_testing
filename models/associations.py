@@ -1,5 +1,5 @@
-from sqlalchemy import UUID, Table, Column, ForeignKey
 from database.session import Base
+from sqlalchemy import UUID, Table, Column, ForeignKey
 
 
 house_owners = Table(

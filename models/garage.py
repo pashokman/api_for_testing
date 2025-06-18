@@ -1,10 +1,10 @@
+from database.session import Base
+from models.associations import garage_owners
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
-from models.associations import garage_owners
-import uuid
 
-from database.session import Base
+import uuid
 
 
 class Garage(Base):

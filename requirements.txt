@@ -7,3 +7,6 @@ python-jose[cryptography]
 bcrypt<4.0
 python-multipart
 pytest
+requests
+faker
+httpx

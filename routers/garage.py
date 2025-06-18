@@ -1,14 +1,14 @@
-import uuid
+from auth.dependencies import get_current_user, get_db
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
-from uuid import UUID
-
-from schemas.garage import GarageCreate, GarageOut
+from models.car import Car
 from models.garage import Garage
 from models.house import House
 from models.user import User
-from models.car import Car
-from auth.dependencies import get_current_user, get_db
+from schemas.garage import GarageCreate, GarageOut
+from sqlalchemy.orm import Session
+from uuid import UUID
+
+import uuid
 
 router = APIRouter(prefix="", tags=["Garages"])
 

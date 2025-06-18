@@ -1,11 +1,11 @@
-import uuid
+from auth.dependencies import get_current_user, get_db
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
-
-from schemas.house import HouseCreate, HouseOut
 from models.house import House
 from models.user import User
-from auth.dependencies import get_current_user, get_db
+from schemas.house import HouseCreate, HouseOut
+from sqlalchemy.orm import Session
+
+import uuid
 
 router = APIRouter(prefix="", tags=["Houses"])
 

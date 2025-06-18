@@ -1,8 +1,7 @@
-from pydantic import BaseModel
-from uuid import UUID
-from typing import List, Optional
-
+from pydantic import BaseModel, ConfigDict
 from schemas.user import UserOut
+from typing import List, Optional
+from uuid import UUID
 
 
 class GarageBase(BaseModel):
@@ -18,5 +17,4 @@ class GarageOut(GarageBase):
     house_id: Optional[UUID] = None
     owners: List[UserOut]
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

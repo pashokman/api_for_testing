@@ -1,19 +1,26 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
-
-from schemas.user import UserCreate, UserOut
-from models.user import User
 from auth.auth_handler import get_password_hash
 from auth.dependencies import get_current_user, get_db
+from fastapi import APIRouter, Depends, HTTPException
+from models.user import User
+from schemas.user import UserCreate, UserOut
+from sqlalchemy.orm import Session
 
 router = APIRouter()
 
 
 @router.post("/register", response_model=UserOut)
 def register(user_data: UserCreate, db: Session = Depends(get_db)):
-    existing_user = db.query(User).filter(User.username == user_data.username).first()
-    if existing_user:
+    if user_data.username == "":
+        raise HTTPException(status_code=400, detail="Username field is required")
+    if user_data.password == "":
+        raise HTTPException(status_code=400, detail="Password field is required")
+    existing_username = db.query(User).filter(User.username == user_data.username).first()
+    if existing_username:
         raise HTTPException(status_code=400, detail="Username already taken")
+    if user_data.email is not None:
+        existing_email = db.query(User).filter(User.email == user_data.email).first()
+        if existing_email:
+            raise HTTPException(status_code=400, detail="Email already registered")
 
     new_user = User(
         username=user_data.username,

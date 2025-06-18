@@ -1,7 +1,7 @@
-from fastapi import FastAPI
-from database.session import engine, Base
-from routers import user, house, garage, car, licence
 from auth.auth_router import router as auth_router
+from database.session import engine, Base
+from fastapi import FastAPI
+from routers import user, house, garage, car, licence
 
 app = FastAPI(title="Complete API for testing")
 
