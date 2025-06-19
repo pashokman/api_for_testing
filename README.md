@@ -28,3 +28,8 @@ uvicorn main:app
 http://127.0.0.1:8000/docs#/
 ```
 7. Start using API.
+
+# To run tests, do previous steps and then run command in a new terminal (5 is a number of threads to run tests in parallel):
+```
+pytest -n 5
+```

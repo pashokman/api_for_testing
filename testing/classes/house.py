@@ -12,13 +12,16 @@ class House(BaseAPI):
 
     def create_house(self, user: User):
         result = self.post(endpoint="houses", json=self.house_obj, headers=user.headers)
-        self.house_id = result.json()["id"]
+        if result.status_code == 200:
+            self.house_id = result.json()["id"]
         return result
 
     def get_my_houses(self, user: User):
         result = self.get(endpoint="houses", headers=user.headers)
         return result
 
-    def delete_house(self, user: User):
-        result = self.delete(endpoint=f"houses/{self.house_id}", headers=user.headers)
+    def delete_house(self, user: User, house_id=None):
+        if house_id is None:
+            house_id = self.house_id
+        result = self.delete(endpoint=f"houses/{house_id}", headers=user.headers)
         return result

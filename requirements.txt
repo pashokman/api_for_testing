@@ -10,3 +10,4 @@ pytest
 requests
 faker
 httpx
+pytest-xdist
