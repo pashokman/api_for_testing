@@ -1,10 +1,8 @@
-from testing.classes.user import User
 from testing.utils.expected_objects_generator.expected_user_object_generator import expected_user_obj
 
 
-def test_get_user_successfuly():
-    user = User()
-    user.create_user()
+def test_get_user_successfuly(setup):
+    user = setup
     user.auth()
     response = user.get_me()
 

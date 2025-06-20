@@ -18,12 +18,12 @@ def create_garage(data: GarageCreate, db: Session = Depends(get_db), user: User 
     house_id = None
     if data.house_id:
         # Accept both UUID and str, convert str to UUID
-        if isinstance(data.house_id, uuid.UUID):
+        if isinstance(data.house_id, uuid.UUID | str):
             house_id = data.house_id
         else:
             try:
                 house_id = uuid.UUID(data.house_id)
-            except ValueError:
+            except (ValueError, TypeError):
                 raise HTTPException(status_code=400, detail="Invalid house_id format")
         house = db.query(House).filter(House.id == house_id).first()
         if not house:

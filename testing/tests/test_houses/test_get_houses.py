@@ -4,7 +4,7 @@ from testing.utils.expected_objects_generator.expected_house_object_generator im
 
 
 def test_get_house_successful(setup):
-    house, user = setup
+    user, house = setup
     house.create_house(user)
     response = house.get_my_houses(user)
 
@@ -13,7 +13,7 @@ def test_get_house_successful(setup):
 
 
 def test_get_few_houses_successful(setup, houses_create_count=5):
-    house, user = setup
+    user, house = setup
     expected_response = []
     response = None
     for i in range(houses_create_count):

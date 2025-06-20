@@ -3,7 +3,7 @@ from testing.classes.user import User
 
 
 def test_delete_house_successful(setup):
-    house, user = setup
+    user, house = setup
     house.create_house(user)
     house.delete_house(user)
 

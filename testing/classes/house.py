@@ -21,6 +21,7 @@ class House(BaseAPI):
         return result
 
     def delete_house(self, user: User, house_id=None):
+        # set house_id if you want to delete another current user house or another user house
         if house_id is None:
             house_id = self.house_id
         result = self.delete(endpoint=f"houses/{house_id}", headers=user.headers)

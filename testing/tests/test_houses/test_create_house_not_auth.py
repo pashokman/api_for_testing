@@ -1,21 +1,4 @@
-from dotenv import load_dotenv
-from testing.classes.house import House
-from testing.classes.user import User
-
-import pytest
-import os
-
-load_dotenv()
-
-INCORRECT_BEARER_TOKEN = os.environ.get("INCORRECT_BEARER_TOKEN")
-
-
-@pytest.fixture()
-def setup_not_auth():
-    user = User()
-    user.create_user()
-    house = House()
-    yield user, house
+from config import INCORRECT_BEARER_TOKEN
 
 
 def test_create_house_without_authorization_header(setup_not_auth):

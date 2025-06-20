@@ -1,6 +1,6 @@
 from auth.auth_handler import get_password_hash
+from config import ADMIN_PASSWORD
 from database.session import engine, SessionLocal, Base
-from dotenv import load_dotenv
 from models.car import Car
 from models.garage import Garage
 from models.house import House
@@ -8,11 +8,6 @@ from models.licence import DriverLicence
 from models.user import User
 from sqlalchemy.orm import Session
 
-import os
-
-load_dotenv()
-
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 # Creating all tables
 Base.metadata.create_all(bind=engine)

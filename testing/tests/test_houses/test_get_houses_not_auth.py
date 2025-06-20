@@ -1,14 +1,8 @@
-from dotenv import load_dotenv
-
-import os
-
-load_dotenv()
-
-INCORRECT_BEARER_TOKEN = os.environ.get("INCORRECT_BEARER_TOKEN")
+from config import INCORRECT_BEARER_TOKEN
 
 
 def test_get_house_without_authorization_header(setup):
-    house, user = setup
+    user, house = setup
     house.create_house(user)
     user.headers = {}
     response = house.get_my_houses(user)
@@ -18,7 +12,7 @@ def test_get_house_without_authorization_header(setup):
 
 
 def test_get_house_with_incorrect_authorization_header(setup):
-    house, user = setup
+    user, house = setup
     house.create_house(user)
     user.headers = {"Authorization": f"Bearer {INCORRECT_BEARER_TOKEN}"}
     response = house.get_my_houses(user)

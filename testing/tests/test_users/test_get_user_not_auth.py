@@ -1,19 +1,4 @@
-from dotenv import load_dotenv
-from testing.classes.user import User
-
-import pytest
-import os
-
-load_dotenv()
-
-INCORRECT_BEARER_TOKEN = os.environ.get("INCORRECT_BEARER_TOKEN")
-
-
-@pytest.fixture()
-def setup():
-    user = User()
-    user.create_user()
-    yield user
+from config import INCORRECT_BEARER_TOKEN
 
 
 def test_get_user_without_authorization_header(setup):
