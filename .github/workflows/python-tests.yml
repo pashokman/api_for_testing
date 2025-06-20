@@ -26,8 +26,8 @@ jobs:
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
           INCORRECT_BEARER_TOKEN: ${{ secrets.INCORRECT_BEARER_TOKEN }}
         run: |
-          start /B python -m uvicorn main:app --host 127.0.0.1 --port 8000
-          timeout 10
+          Start-Process python -ArgumentList '-m','uvicorn','main:app','--host','127.0.0.1','--port','8000'
+          Start-Sleep -Seconds 10
 
       - name: Run tests
         env:
