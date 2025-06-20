@@ -4,6 +4,8 @@ from testing.classes.user import User
 
 import pytest
 
+pytestmark = pytest.mark.garage
+
 
 @pytest.fixture()
 def setup_not_auth():

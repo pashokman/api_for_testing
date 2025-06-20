@@ -1,9 +1,9 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from uuid import UUID
 
 
 class DriverLicenceBase(BaseModel):
-    licence_number: str
+    licence_number: str = Field(..., min_length=1)
 
 
 class DriverLicenceCreate(DriverLicenceBase):

@@ -1,6 +1,10 @@
 from testing.classes.user import User
 from testing.utils.expected_objects_generator.expected_user_object_generator import expected_user_obj
 
+import pytest
+
+pytestmark = pytest.mark.user
+
 
 def test_create_user_with_username_none():
     user = User()

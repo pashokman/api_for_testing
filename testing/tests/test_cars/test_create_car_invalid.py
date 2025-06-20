@@ -1,5 +1,7 @@
 import pytest
 
+pytestmark = pytest.mark.car
+
 
 def test_create_car_with_model_int(setup):
     user, house, garage, car = setup

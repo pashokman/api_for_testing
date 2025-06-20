@@ -1,6 +1,10 @@
 from testing.classes.house import House
 from testing.classes.user import User
 
+import pytest
+
+pytestmark = pytest.mark.house
+
 
 def test_delete_house_successful(setup):
     user, house = setup

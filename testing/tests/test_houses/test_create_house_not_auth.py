@@ -1,5 +1,9 @@
 from config import INCORRECT_BEARER_TOKEN
 
+import pytest
+
+pytestmark = pytest.mark.house
+
 
 def test_create_house_without_authorization_header(setup_not_auth):
     user, house = setup_not_auth

@@ -1,5 +1,9 @@
 from config import INCORRECT_BEARER_TOKEN
 
+import pytest
+
+pytestmark = pytest.mark.user
+
 
 def test_get_user_without_authorization_header(setup):
     user = setup

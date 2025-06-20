@@ -2,6 +2,10 @@
 If I delete the house, which is associated with the garage, which is associated with the car, the garage and the car should also be deleted.
 """
 
+import pytest
+
+pytestmark = [pytest.mark.car, pytest.mark.garage, pytest.mark.house]
+
 
 def test_cascade_deletion_house_is_associated_to_garage_is_associated_to_car(setup):
     user, house, garage, car = setup

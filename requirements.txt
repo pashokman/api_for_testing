@@ -12,3 +12,4 @@ faker
 httpx
 pytest-xdist
 passlib
+pytest-rerunfailures

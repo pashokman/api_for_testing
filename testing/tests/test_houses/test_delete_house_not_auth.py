@@ -1,5 +1,9 @@
 from config import INCORRECT_BEARER_TOKEN
 
+import pytest
+
+pytestmark = pytest.mark.house
+
 
 def test_delete_house_without_authorization_header(setup):
     user, house = setup

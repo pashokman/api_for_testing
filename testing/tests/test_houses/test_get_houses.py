@@ -2,6 +2,10 @@ from testing.classes.house import House
 from testing.classes.user import User
 from testing.utils.expected_objects_generator.expected_house_object_generator import expected_house_obj
 
+import pytest
+
+pytestmark = pytest.mark.house
+
 
 def test_get_house_successful(setup):
     user, house = setup

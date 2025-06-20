@@ -1,6 +1,10 @@
 from testing.classes.garage import Garage
 from testing.classes.user import User
 
+import pytest
+
+pytestmark = pytest.mark.garage
+
 
 def test_delete_garage_successful(setup):
     user, house, garage = setup

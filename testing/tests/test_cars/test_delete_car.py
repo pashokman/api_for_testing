@@ -1,6 +1,10 @@
 from testing.classes.car import Car
 from testing.classes.user import User
 
+import pytest
+
+pytestmark = pytest.mark.car
+
 
 def test_delete_car_successful(setup):
     user, house, garage, car = setup

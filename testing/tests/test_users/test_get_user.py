@@ -1,5 +1,9 @@
 from testing.utils.expected_objects_generator.expected_user_object_generator import expected_user_obj
 
+import pytest
+
+pytestmark = pytest.mark.user
+
 
 def test_get_user_successfuly(setup):
     user = setup

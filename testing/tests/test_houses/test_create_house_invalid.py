@@ -1,5 +1,7 @@
 import pytest
 
+pytestmark = pytest.mark.house
+
 
 def test_create_house_with_title_int(setup):
     user, house = setup

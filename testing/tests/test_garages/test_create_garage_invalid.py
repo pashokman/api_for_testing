@@ -1,5 +1,7 @@
 import pytest
 
+pytestmark = pytest.mark.garage
+
 
 def test_create_garage_with_title_int(setup):
     user, house, garage = setup

@@ -1,5 +1,9 @@
 from config import INCORRECT_BEARER_TOKEN
 
+import pytest
+
+pytestmark = pytest.mark.garage
+
 
 def test_get_garage_without_authorization_header(setup_not_auth):
     user, house, garage = setup_not_auth

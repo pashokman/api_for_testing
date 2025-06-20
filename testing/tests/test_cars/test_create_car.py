@@ -1,5 +1,9 @@
 from testing.utils.expected_objects_generator.expected_car_object_generator import expected_car_obj
 
+import pytest
+
+pytestmark = pytest.mark.car
+
 
 def test_create_car_successful_without_garage_relation(setup):
     user, house, garage, car = setup
