@@ -11,3 +11,4 @@ requests
 faker
 httpx
 pytest-xdist
+passlib
