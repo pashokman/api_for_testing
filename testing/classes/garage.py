@@ -12,7 +12,7 @@ class Garage(BaseAPI):
         self.house_id = None
 
     def create_garage(self, user: User, house_id=None):
-        # set house_id a new garage should be related to a house
+        # set house_id if a new garage should be related to a house
         self.garage_obj["house_id"] = house_id
         result = self.post(endpoint="garages", json=self.garage_obj, headers=user.headers)
         if result.status_code == 200:

@@ -6,7 +6,7 @@ from typing import Any
 
 def expected_garage_obj(user: User, house: House, garage: Garage):
     """
-    Add id field to previous generated garage_object and set house_id into house_id fieldm if garage is relative to house
+    Add an id field to previous generated garage_object and set house_id into house_id field if a garage is relative to a house
     """
 
     new_garage_obj: dict[str, Any] = garage.garage_obj

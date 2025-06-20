@@ -1,5 +1,5 @@
 """
-If I delete the house, that is associated with the garage, the garage should also be deleted.
+If I delete the house, which is associated with the garage, the garage should also be deleted.
 """
 
 

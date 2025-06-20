@@ -5,7 +5,7 @@ from typing import Any
 
 def expected_house_obj(house: House, user: User):
     """
-    Add id field to previous generated house_object and append user_id into owner_ids list
+    Add an id field to previous generated house_object and append a user_id into an owner_ids list
     """
 
     new_house_obj: dict[str, Any] = house.house_obj

@@ -1,3 +1,4 @@
+from testing.classes.car import Car
 from testing.classes.garage import Garage
 from testing.classes.house import House
 from testing.classes.user import User
@@ -12,7 +13,8 @@ def setup():
     user.auth()
     house = House()
     garage = Garage()
-    yield user, house, garage
+    car = Car()
+    yield user, house, garage, car
 
 
 @pytest.fixture()
@@ -21,4 +23,5 @@ def setup_not_auth():
     user.create_user()
     house = House()
     garage = Garage()
-    yield user, house, garage
+    car = Car()
+    yield user, house, garage, car
