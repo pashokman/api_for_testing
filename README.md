@@ -33,3 +33,6 @@ http://127.0.0.1:8000/docs#/
 ```
 pytest -n 5
 ```
+
+
+Every time on pull/push request, test should run in GitHub Actions.
