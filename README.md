@@ -1,8 +1,8 @@
-# complete_api_for_testing
+# api_for_testing
 I created this API to practice testing it
 
 
-# Steps to run an API first
+## Steps to run an API first
 1. Create virtual environment:
 ```
 python -m venv venv
@@ -29,10 +29,17 @@ http://127.0.0.1:8000/docs#/
 ```
 7. Start using API.
 
-# To run tests, do previous steps and then run command in a new terminal (5 is a number of threads to run tests in parallel):
+## To run tests, do previous steps and then run command in a new terminal (to configure pytest run use pytest.ini):
 ```
-pytest -n 5
+pytest
 ```
+
+## To see the allure-report, user command (after test run):
+```
+allure serve allure-results
+```
+
+## To see the html-report, just open myreport.html in any browser (after test run):
 
 
 Every time on pull/push request, test should run in GitHub Actions.

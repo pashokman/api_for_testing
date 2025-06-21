@@ -141,3 +141,5 @@ cython_debug/
 
 # Myignore files
 app.db
+allure-results
+report
