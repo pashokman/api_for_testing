@@ -5,17 +5,17 @@ import pytest
 
 
 @pytest.fixture()
-def setup():
-    user = User()
+def setup(request):
+    user = User(request=request)
+    licence = DriverLicence(request=request)
     user.create_user()
     user.auth()
-    licence = DriverLicence()
     yield user, licence
 
 
 @pytest.fixture()
-def setup_not_auth():
-    user = User()
+def setup_not_auth(request):
+    user = User(request=request)
+    license = DriverLicence(request=request)
     user.create_user()
-    license = DriverLicence()
     yield user, license

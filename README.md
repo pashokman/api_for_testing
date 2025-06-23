@@ -28,6 +28,10 @@ uvicorn main:app
 http://127.0.0.1:8000/docs#/
 ```
 7. Start using API.
+8. Start logging server for saving logs into a file.
+```
+python .\testing\utils\logs\log_server.py
+```
 
 ## To run tests, do previous steps and then run command in a new terminal (to configure pytest run use pytest.ini):
 ```

@@ -5,17 +5,17 @@ import pytest
 
 
 @pytest.fixture()
-def setup():
-    user = User()
+def setup(request):
+    user = User(request=request)
+    house = House(request=request)
     user.create_user()
     user.auth()
-    house = House()
     yield user, house
 
 
 @pytest.fixture()
-def setup_not_auth():
-    user = User()
+def setup_not_auth(request):
+    user = User(request=request)
+    house = House(request=request)
     user.create_user()
-    house = House()
     yield user, house

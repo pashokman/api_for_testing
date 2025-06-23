@@ -6,8 +6,8 @@ import pytest
 pytestmark = pytest.mark.user
 
 
-def test_create_user_with_username_none():
-    user = User()
+def test_create_user_with_username_none(setup_user):
+    user = setup_user
     user.user_obj["username"] = None
     response = user.create_user()
 
@@ -16,8 +16,8 @@ def test_create_user_with_username_none():
     assert expected_status_code == response.status_code
 
 
-def test_create_user_with_empty_username():
-    user = User()
+def test_create_user_with_empty_username(setup_user):
+    user = setup_user
     user.user_obj["username"] = ""
     response = user.create_user()
 
@@ -28,8 +28,8 @@ def test_create_user_with_empty_username():
     assert expected_response_message == response.json()["detail"]
 
 
-def test_create_user_without_username_field():
-    user = User()
+def test_create_user_without_username_field(setup_user):
+    user = setup_user
     del user.user_obj["username"]
     response = user.create_user()
 
@@ -38,8 +38,8 @@ def test_create_user_without_username_field():
     assert expected_status_code == response.status_code
 
 
-def test_create_user_with_password_none():
-    user = User()
+def test_create_user_with_password_none(setup_user):
+    user = setup_user
     user.user_obj["password"] = None
     response = user.create_user()
 
@@ -48,8 +48,8 @@ def test_create_user_with_password_none():
     assert expected_status_code == response.status_code
 
 
-def test_create_user_with_empty_password():
-    user = User()
+def test_create_user_with_empty_password(setup_user):
+    user = setup_user
     user.user_obj["password"] = ""
     response = user.create_user()
 
@@ -60,8 +60,8 @@ def test_create_user_with_empty_password():
     assert expected_response_message == response.json()["detail"]
 
 
-def test_create_user_without_password_field():
-    user = User()
+def test_create_user_without_password_field(setup_user):
+    user = setup_user
     del user.user_obj["password"]
     response = user.create_user()
 
@@ -70,8 +70,8 @@ def test_create_user_without_password_field():
     assert expected_status_code == response.status_code
 
 
-def test_create_user_with_email_none():
-    user = User()
+def test_create_user_with_email_none(setup_user):
+    user = setup_user
     user.user_obj["email"] = None
     response = user.create_user()
 
@@ -81,8 +81,8 @@ def test_create_user_with_email_none():
     assert expected_response == response.json()
 
 
-def test_create_user_with_empty_email():
-    user = User()
+def test_create_user_with_empty_email(setup_user):
+    user = setup_user
     user.user_obj["email"] = ""
     response = user.create_user()
 
@@ -93,8 +93,8 @@ def test_create_user_with_empty_email():
     assert expected_response == response.json()
 
 
-def test_create_user_without_email_field():
-    user = User()
+def test_create_user_without_email_field(setup_user):
+    user = setup_user
     del user.user_obj["email"]
     response = user.create_user()
 

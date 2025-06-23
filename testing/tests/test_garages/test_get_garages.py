@@ -26,13 +26,13 @@ def test_get_garage_with_house_relation_successful(setup):
     assert expected_response in response.json()
 
 
-def test_get_few_garages_successful(setup, garages_create_count=5):
+def test_get_few_garages_successful(setup, request, garages_create_count=5):
     user, house, garage = setup
     expected_response = []
     response = None
     for i in range(garages_create_count):
         garage_name = f"garage{i}"
-        garage_name = Garage()
+        garage_name = Garage(request=request)
         g = garage_name.create_garage(user)
         expected_response.append(g.json())
         response = garage_name.get_my_garages(user)
@@ -40,22 +40,22 @@ def test_get_few_garages_successful(setup, garages_create_count=5):
     assert expected_response == response.json()
 
 
-def test_get_other_user_garages():
+def test_get_other_user_garages(request):
     # Create 2 users
-    user1 = User()
+    user1 = User(request=request)
     user1.create_user()
     user1.auth()
 
-    user2 = User()
+    user2 = User(request=request)
     user2.create_user()
     user2.auth()
 
     # User1 creates a garage
-    garage1 = Garage()
+    garage1 = Garage(request=request)
     garage1.create_garage(user1)
 
     # User2 tries to get garage1, should get en empty response
-    garage2 = Garage()
+    garage2 = Garage(request=request)
     response = garage2.get_my_garages(user2)
 
     expected_response = []

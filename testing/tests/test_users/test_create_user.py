@@ -6,8 +6,8 @@ import pytest
 pytestmark = pytest.mark.user
 
 
-def test_create_user_with_valid_credentials():
-    user = User()
+def test_create_user_with_valid_credentials(setup_user):
+    user = setup_user
     response = user.create_user()
     expected_response = expected_user_obj(user)
 

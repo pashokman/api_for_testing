@@ -5,8 +5,8 @@ import pytest
 pytestmark = pytest.mark.user
 
 
-def test_get_user_successfuly(setup):
-    user = setup
+def test_get_user_successfuly(setup_user_create):
+    user = setup_user_create
     user.auth()
     response = user.get_me()
 
