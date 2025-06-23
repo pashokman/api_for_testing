@@ -31,7 +31,7 @@ jobs:
 
       - name: Start log server
         run: |
-          python utils/logs/log_server.py &
+          python testing/utils/logs/log_server.py &
           sleep 2
         shell: bash
 
