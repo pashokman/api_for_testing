@@ -20,14 +20,14 @@ jobs:
 
       - name: Start FastAPI app (Uvicorn)
         env:
-          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          API_BASE_URL: http://127.0.0.1:8000/
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ALGORITHM: ${{ secrets.ALGORITHM }}
           ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
           INCORRECT_BEARER_TOKEN: ${{ secrets.INCORRECT_BEARER_TOKEN }}
         run: |
-          Start-Process python -ArgumentList '-m','uvicorn','main:app','--host','127.0.0.1','--port','8000'
+          Start-Process python -ArgumentList '-m','uvicorn','app.main:app','--host','127.0.0.1','--port','8000'
           Start-Sleep -Seconds 10
 
       - name: Start log server
@@ -38,7 +38,7 @@ jobs:
 
       - name: Run tests
         env:
-          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          API_BASE_URL: http://127.0.0.1:8000/
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ALGORITHM: ${{ secrets.ALGORITHM }}
           ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
