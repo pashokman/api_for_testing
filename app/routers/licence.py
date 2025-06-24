@@ -1,8 +1,8 @@
-from auth.dependencies import get_current_user, get_db
+from app.auth.dependencies import get_current_user, get_db
+from app.models.licence import DriverLicence
+from app.models.user import User
+from app.schemas.licence import DriverLicenceCreate, DriverLicenceOut
 from fastapi import APIRouter, Depends, HTTPException
-from models.licence import DriverLicence
-from models.user import User
-from schemas.licence import DriverLicenceCreate, DriverLicenceOut
 from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="", tags=["Driver Licence"])

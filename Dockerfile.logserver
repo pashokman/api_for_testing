@@ -1,0 +1,12 @@
+FROM python:3.13
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+COPY ./testing/utils/logs/log_server.py ./log_server.py
+
+EXPOSE 9020
+
+CMD ["python", "log_server.py"]

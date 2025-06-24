@@ -1,5 +1,5 @@
-from database.session import Base
-from models.associations import garage_owners
+from app.database.session import Base
+from app.models.associations import garage_owners
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID

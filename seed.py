@@ -1,11 +1,11 @@
-from auth.auth_handler import get_password_hash
-from config import ADMIN_PASSWORD
-from database.session import engine, SessionLocal, Base
-from models.car import Car
-from models.garage import Garage
-from models.house import House
-from models.licence import DriverLicence
-from models.user import User
+from app.auth.auth_handler import get_password_hash
+from app.config import ADMIN_PASSWORD
+from app.database.session import engine, SessionLocal, Base
+from app.models.car import Car
+from app.models.garage import Garage
+from app.models.house import House
+from app.models.licence import DriverLicence
+from app.models.user import User
 from sqlalchemy.orm import Session
 
 

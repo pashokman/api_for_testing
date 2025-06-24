@@ -1,8 +1,8 @@
-from auth.dependencies import get_current_user, get_db
+from app.auth.dependencies import get_current_user, get_db
+from app.models.house import House
+from app.models.user import User
+from app.schemas.house import HouseCreate, HouseOut
 from fastapi import APIRouter, Depends, HTTPException
-from models.house import House
-from models.user import User
-from schemas.house import HouseCreate, HouseOut
 from sqlalchemy.orm import Session
 
 import uuid

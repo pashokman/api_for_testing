@@ -1,4 +1,4 @@
-from database.session import Base
+from app.database.session import Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from sqlalchemy.dialects.postgresql import UUID

@@ -1,7 +1,7 @@
-from auth.auth_handler import create_access_token, verify_password
-from database.session import SessionLocal
+from app.auth.auth_handler import create_access_token, verify_password
+from app.database.session import SessionLocal
+from app.models.user import User
 from fastapi import APIRouter, Depends, HTTPException
-from models.user import User
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 

@@ -1,8 +1,8 @@
-from auth.auth_handler import get_password_hash
-from auth.dependencies import get_current_user, get_db
+from app.auth.auth_handler import get_password_hash
+from app.auth.dependencies import get_current_user, get_db
+from app.models.user import User
+from app.schemas.user import UserCreate, UserOut
 from fastapi import APIRouter, Depends, HTTPException
-from models.user import User
-from schemas.user import UserCreate, UserOut
 from sqlalchemy.orm import Session
 
 router = APIRouter()

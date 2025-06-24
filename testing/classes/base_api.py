@@ -1,12 +1,12 @@
+import os
 from testing.utils.logs.logger_with_context import get_logger_with_context
-from typing import Any
 
 import requests
 
 
 class BaseAPI:
     def __init__(self, headers=None, request=None):
-        self.base_url = "http://127.0.0.1:8000/"
+        self.base_url = os.getenv("API_BASE_URL", "http://127.0.0.1:8000/")
         self.headers = headers or {}
         self.logger = get_logger_with_context(request)
 

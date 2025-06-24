@@ -1,10 +1,10 @@
-from auth.dependencies import get_current_user, get_db
+from app.auth.dependencies import get_current_user, get_db
+from app.models.car import Car
+from app.models.garage import Garage
+from app.models.house import House
+from app.models.user import User
+from app.schemas.garage import GarageCreate, GarageOut
 from fastapi import APIRouter, Depends, HTTPException
-from models.car import Car
-from models.garage import Garage
-from models.house import House
-from models.user import User
-from schemas.garage import GarageCreate, GarageOut
 from sqlalchemy.orm import Session
 from uuid import UUID
 

@@ -1,9 +1,9 @@
-from auth.auth_handler import decode_access_token
-from database.session import SessionLocal
+from app.auth.auth_handler import decode_access_token
+from app.database.session import SessionLocal
+from app.models.user import User
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, ExpiredSignatureError
-from models.user import User
 from sqlalchemy.orm import Session
 
 import uuid

@@ -1,4 +1,4 @@
-from config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
+from app.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 from datetime import datetime, timedelta, UTC
 from jose import jwt
 from passlib.context import CryptContext

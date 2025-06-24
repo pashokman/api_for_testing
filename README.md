@@ -43,7 +43,12 @@ pytest
 allure serve allure-results
 ```
 
-## To see the html-report, just open myreport.html in any browser (after test run):
+## To see the html-report, just open myreport.html in any browser (after test run)
+
+## To setup project in docker, run:
+```
+docker-compose up --build
+```
 
 
 Every time on pull/push request, test should run in GitHub Actions.

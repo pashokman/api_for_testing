@@ -1,8 +1,8 @@
-from database.session import Base
+from app.database.session import Base
+from app.models.associations import garage_owners, house_owners, car_owners
 from sqlalchemy import Column, String, Boolean
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
-from models.associations import garage_owners, house_owners, car_owners
 
 import uuid
 

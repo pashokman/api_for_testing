@@ -1,4 +1,4 @@
-from config import INCORRECT_BEARER_TOKEN
+from app.config import INCORRECT_BEARER_TOKEN
 
 import pytest
 

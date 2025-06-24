@@ -1,4 +1,4 @@
-from database.session import Base
+from app.database.session import Base
 from sqlalchemy import UUID, Table, Column, ForeignKey
 
 

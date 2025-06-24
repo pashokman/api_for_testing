@@ -1,5 +1,5 @@
+from app.schemas.user import UserOut
 from pydantic import BaseModel, ConfigDict
-from schemas.user import UserOut
 from typing import List, Optional
 from uuid import UUID
 

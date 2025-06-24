@@ -1,7 +1,7 @@
-from auth.auth_handler import create_access_token
+from app.auth.auth_handler import create_access_token
+from app.main import app
 from datetime import timedelta
 from fastapi.testclient import TestClient
-from main import app
 from testing.classes.house import House
 from testing.classes.user import User
 
