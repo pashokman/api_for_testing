@@ -20,7 +20,7 @@ jobs:
 
       - name: Start FastAPI app (Uvicorn)
         env:
-          API_BASE_URL: http://api:8000/
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ALGORITHM: ${{ secrets.ALGORITHM }}
           ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
@@ -38,7 +38,7 @@ jobs:
 
       - name: Run tests
         env:
-          API_BASE_URL: http://api:8000/
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
           ALGORITHM: ${{ secrets.ALGORITHM }}
           ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
