@@ -7,12 +7,14 @@ class House(BaseAPI):
 
     def __init__(self, headers=None, request=None):
         super().__init__(headers=headers, request=request)
-        self.house_obj = generate_house()
+        self.house_obj = None
         self.house_id = None
 
     def create_house(self, user: User):
         response = None
         try:
+            if self.house_obj is None:
+                self.house_obj = generate_house()
             housetitle = self.house_obj.get("title")
             if self.logger:
                 if housetitle is not None:
@@ -49,16 +51,15 @@ class House(BaseAPI):
         # set house_id if you want to delete another current user house or another user house
         response = None
         try:
-            housetitle = self.house_obj.get("title")
             if self.logger:
                 if house_id is None:
                     house_id = self.house_id
-                self.logger.info(f"Deleting house: {housetitle}")
+                self.logger.info(f"Deleting house with id: {house_id}")
             response = self.delete(endpoint=f"houses/{house_id}", headers=user.headers)
             if response.status_code == 200:
-                self.logger.info(f"Deleting house: {housetitle}, response json: {response.json()}")
+                self.logger.info(f"Deleting house with id: {house_id}, response json: {response.json()}")
             else:
-                self.logger.error(f"Deleting house: {housetitle}, response json: {response.json()}")
+                self.logger.error(f"Deleting house with id: {house_id}, response json: {response.json()}")
         except Exception as e:
             self.logger.error(f"Error in delete_house: {e}")
         finally:

@@ -47,10 +47,22 @@ def create_car(data: CarCreate, db: Session = Depends(get_db), user: User = Depe
     return car
 
 
-@router.get("/", response_model=List[CarOut])
+@router.get("/", response_model=list[CarOut])
 def get_my_cars(db: Session = Depends(get_db), user: User = Depends(get_current_user)):
-    cars = db.query(Car).filter(Car.owners.any(id=user.id)).all()
-    return cars
+    if getattr(user, "is_admin", False):
+        garages = db.query(Car).all()
+    else:
+        garages = db.query(Car).filter(Car.owners.any(id=user.id)).all()
+
+    return [
+        CarOut(
+            id=getattr(g, "id"),
+            model=getattr(g, "model"),
+            garage_id=getattr(g, "garage_id"),
+            owners=getattr(g, "owners"),
+        )
+        for g in garages
+    ]
 
 
 @router.delete("/{car_id}")

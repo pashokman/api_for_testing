@@ -42,8 +42,20 @@ def create_garage(data: GarageCreate, db: Session = Depends(get_db), user: User 
 
 @router.get("/", response_model=list[GarageOut])
 def get_my_garages(db: Session = Depends(get_db), user: User = Depends(get_current_user)):
-    garages = db.query(Garage).filter(Garage.owners.any(id=user.id)).all()
-    return garages
+    if getattr(user, "is_admin", False):
+        garages = db.query(Garage).all()
+    else:
+        garages = db.query(Garage).filter(Garage.owners.any(id=user.id)).all()
+
+    return [
+        GarageOut(
+            id=getattr(g, "id"),
+            title=getattr(g, "title"),
+            house_id=getattr(g, "house_id"),
+            owners=getattr(g, "owners"),
+        )
+        for g in garages
+    ]
 
 
 @router.delete("/{garage_id}")

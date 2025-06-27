@@ -14,7 +14,9 @@ class DriverLicence(BaseAPI):
     def create_licence(self, user: User):
         response = None
         try:
-            user_name = user.user_obj.get("username")
+            user_name = getattr(user, "username", None)
+            if user_name is None and hasattr(user, "user_obj"):
+                user_name = user.user_obj.get("username")
             if self.logger:
                 if self.licence_obj.get("licence_number") is not None:
                     self.logger.info(f"Creating driver licence for user: {user_name}")
@@ -34,7 +36,9 @@ class DriverLicence(BaseAPI):
     def get_my_licence(self, user: User):
         response = None
         try:
-            user_name = user.user_obj.get("username")
+            user_name = getattr(user, "username", None)
+            if user_name is None and hasattr(user, "user_obj"):
+                user_name = user.user_obj.get("username")
             if self.logger:
                 self.logger.info(f"Getting driver licence for user: {user_name}.")
             response = self.get(endpoint="licences", headers=user.headers)
@@ -50,7 +54,9 @@ class DriverLicence(BaseAPI):
     def delete_licence(self, user: User):
         response = None
         try:
-            user_name = user.user_obj.get("username")
+            user_name = getattr(user, "username", None)
+            if user_name is None and hasattr(user, "user_obj"):
+                user_name = user.user_obj.get("username")
             if self.logger:
                 self.logger.info(f"Deleting driver licence for user: {user_name},")
             response = self.delete(endpoint=f"licences", headers=user.headers)

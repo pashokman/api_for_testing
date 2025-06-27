@@ -2,9 +2,9 @@
 I created this API to practice testing it and adding the most useful functionality, like:
 - environment variables;
 - pytest run configuration in pytest.ini;
-- pytest marks;
+- tests separation - pytest marks;
 - rerun functionality to avoid flacky tests;
-- logging;
+- parallel run and logging into a single file;
 - reporting - Allure, html-report;
 - GitHub Actions run;
 - Docker build and run.

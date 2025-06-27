@@ -31,11 +31,25 @@ def get_my_driver_licence(db: Session = Depends(get_db), user: User = Depends(ge
     return licence
 
 
+# @router.delete("/")
+# def delete_my_driver_licence(db: Session = Depends(get_db), user: User = Depends(get_current_user)):
+#     licence = db.query(DriverLicence).filter(DriverLicence.user_id == user.id).first()
+#     if not licence:
+#         raise HTTPException(status_code=404, detail="Driver licence not found")
+
+
+#     db.delete(licence)
+#     db.commit()
+#     return {"detail": "Driver licence deleted"}
 @router.delete("/")
 def delete_my_driver_licence(db: Session = Depends(get_db), user: User = Depends(get_current_user)):
     licence = db.query(DriverLicence).filter(DriverLicence.user_id == user.id).first()
     if not licence:
         raise HTTPException(status_code=404, detail="Driver licence not found")
+
+    # Check if user is owner or admin
+    if user.user_id != licence.user_id and not bool(user.is_admin):
+        raise HTTPException(status_code=403, detail="Not allowed to delete this car")
 
     db.delete(licence)
     db.commit()

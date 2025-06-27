@@ -1,3 +1,5 @@
+from testing.utils.generators.garage_generator import generate_garage
+
 import pytest
 
 pytestmark = pytest.mark.garage
@@ -5,6 +7,7 @@ pytestmark = pytest.mark.garage
 
 def test_create_garage_with_title_int(setup):
     user, house, garage = setup
+    garage.garage_obj = generate_garage()
     garage.garage_obj["title"] = 12645
     response = garage.create_garage(user)
 
@@ -24,6 +27,7 @@ def test_create_garage_with_house_id_list(setup):
 
 def test_create_garage_without_title(setup):
     user, house, garage = setup
+    garage.garage_obj = generate_garage()
     del garage.garage_obj["title"]
     response = garage.create_garage(user)
 
@@ -38,6 +42,7 @@ def test_create_garage_with_2_letters_title(setup):
     This test should failed if API have this condition
     """
     user, house, garage = setup
+    garage.garage_obj = generate_garage()
     garage.garage_obj["title"] = "WB"
     response = garage.create_garage(user)
 

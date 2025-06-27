@@ -36,6 +36,6 @@ def test_delete_other_user_house(request):
     response = house2.delete_house(user2, house1.house_id)
 
     expected_status_code = 403
-    expected_error_message = "Not your house"
+    expected_error_message = "Not allowed to delete this house"
     assert response.status_code == expected_status_code
     assert response.json()["detail"] == expected_error_message

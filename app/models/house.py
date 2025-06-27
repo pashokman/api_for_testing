@@ -15,4 +15,4 @@ class House(Base):
     address = Column(String, nullable=False)
 
     owners = relationship("User", secondary=house_owners, back_populates="owned_houses")
-    garages = relationship("Garage", cascade="all, delete", back_populates="house")
+    garages = relationship("Garage", back_populates="house")

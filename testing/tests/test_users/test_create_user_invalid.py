@@ -1,6 +1,5 @@
-from testing.classes.user import User
+from testing.utils.generators.user_generator import generate_user
 from testing.utils.expected_objects_generator.expected_user_object_generator import expected_user_obj
-
 import pytest
 
 pytestmark = pytest.mark.user
@@ -8,6 +7,7 @@ pytestmark = pytest.mark.user
 
 def test_create_user_with_username_none(setup_user):
     user = setup_user
+    user.user_obj = generate_user(password_length=8)
     user.user_obj["username"] = None
     response = user.create_user()
 
@@ -18,6 +18,7 @@ def test_create_user_with_username_none(setup_user):
 
 def test_create_user_with_empty_username(setup_user):
     user = setup_user
+    user.user_obj = generate_user(password_length=8)
     user.user_obj["username"] = ""
     response = user.create_user()
 
@@ -30,6 +31,7 @@ def test_create_user_with_empty_username(setup_user):
 
 def test_create_user_without_username_field(setup_user):
     user = setup_user
+    user.user_obj = generate_user(password_length=8)
     del user.user_obj["username"]
     response = user.create_user()
 
@@ -40,6 +42,7 @@ def test_create_user_without_username_field(setup_user):
 
 def test_create_user_with_password_none(setup_user):
     user = setup_user
+    user.user_obj = generate_user(password_length=8)
     user.user_obj["password"] = None
     response = user.create_user()
 
@@ -50,6 +53,7 @@ def test_create_user_with_password_none(setup_user):
 
 def test_create_user_with_empty_password(setup_user):
     user = setup_user
+    user.user_obj = generate_user(password_length=8)
     user.user_obj["password"] = ""
     response = user.create_user()
 
@@ -62,6 +66,7 @@ def test_create_user_with_empty_password(setup_user):
 
 def test_create_user_without_password_field(setup_user):
     user = setup_user
+    user.user_obj = generate_user(password_length=8)
     del user.user_obj["password"]
     response = user.create_user()
 
@@ -72,6 +77,7 @@ def test_create_user_without_password_field(setup_user):
 
 def test_create_user_with_email_none(setup_user):
     user = setup_user
+    user.user_obj = generate_user(password_length=8)
     user.user_obj["email"] = None
     response = user.create_user()
 
@@ -83,6 +89,7 @@ def test_create_user_with_email_none(setup_user):
 
 def test_create_user_with_empty_email(setup_user):
     user = setup_user
+    user.user_obj = generate_user(password_length=8)
     user.user_obj["email"] = ""
     response = user.create_user()
 
@@ -95,6 +102,7 @@ def test_create_user_with_empty_email(setup_user):
 
 def test_create_user_without_email_field(setup_user):
     user = setup_user
+    user.user_obj = generate_user(password_length=8)
     del user.user_obj["email"]
     response = user.create_user()
 

@@ -7,7 +7,7 @@ class Garage(BaseAPI):
 
     def __init__(self, headers=None, request=None):
         super().__init__(headers=headers, request=request)
-        self.garage_obj = generate_garage()
+        self.garage_obj = None
         self.garage_id = None
         self.house_id = None
 
@@ -15,6 +15,8 @@ class Garage(BaseAPI):
         # set house_id if a new garage should be related to a house
         response = None
         try:
+            if self.garage_obj is None:
+                self.garage_obj = generate_garage()
             self.garage_obj["house_id"] = house_id
             garage_title = self.garage_obj.get("title")
             if self.logger:
@@ -52,16 +54,15 @@ class Garage(BaseAPI):
         # set garage_id if you want to delete another current user garage or another user garage
         response = None
         try:
-            garage_title = self.garage_obj.get("title")
             if self.logger:
                 if garage_id is None:
                     garage_id = self.garage_id
-                self.logger.info(f"Deleting garage: {garage_title}")
+                self.logger.info(f"Deleting garage with id: {garage_id}")
             response = self.delete(endpoint=f"garages/{garage_id}", headers=user.headers)
             if response.status_code == 200:
-                self.logger.info(f"Deleting garage: {garage_title}, response json: {response.json()}")
+                self.logger.info(f"Deleting garage with id: {garage_id}, response json: {response.json()}")
             else:
-                self.logger.error(f"Deleting garage: {garage_title}, response json: {response.json()}")
+                self.logger.error(f"Deleting garage with id: {garage_id}, response json: {response.json()}")
         except Exception as e:
             self.logger.error(f"Error in delete_garage: {e}")
         finally:

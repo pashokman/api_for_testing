@@ -6,13 +6,15 @@ class User(BaseAPI):
 
     def __init__(self, headers=None, request=None):
         super().__init__(headers=headers, request=request)
-        self.user_obj = generate_user(password_length=8)
+        self.user_obj = None
         self.bearer_token = None
         self.user_id = None
 
     def create_user(self):
         response = None
         try:
+            if self.user_obj is None:
+                self.user_obj = generate_user(password_length=8)
             username = self.user_obj.get("username")
             if self.logger:
                 if username is not None:
@@ -54,12 +56,12 @@ class User(BaseAPI):
         try:
             username = self.user_obj["username"]
             if self.logger:
-                self.logger.info(f"Getting profile for user: {username}")
+                self.logger.info(f"Getting user: {username} profile")
             response = self.get(endpoint="users/me", headers=self.headers)
             if response.status_code == 200:
-                self.logger.info(f"Getting profile for user: {username}, response json: {response.json()}")
+                self.logger.info(f"Getting user: {username} profile, response json: {response.json()}")
             else:
-                self.logger.error(f"Getting profile for user: {username}, response json: {response.json()}")
+                self.logger.error(f"Getting user: {username} profile, response json: {response.json()}")
         except Exception as e:
             self.logger.error(f"Error in get_me: {e}")
         finally:

@@ -15,4 +15,4 @@ class Garage(Base):
 
     house = relationship("House", back_populates="garages")
     owners = relationship("User", secondary=garage_owners, back_populates="owned_garages")
-    cars = relationship("Car", back_populates="garage", cascade="all, delete-orphan")
+    cars = relationship("Car", back_populates="garage")
