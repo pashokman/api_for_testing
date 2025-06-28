@@ -26,6 +26,6 @@ if not existing_admin:
     )
     db.add(admin_user)
     db.commit()
-    print("✅ Admin created")
+    print("Admin created")
 else:
-    print("ℹ️ Admin already exists")
+    print("ℹAdmin already exists")
