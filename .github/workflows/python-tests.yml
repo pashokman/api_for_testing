@@ -31,6 +31,8 @@ jobs:
           Start-Sleep -Seconds 10
 
       - name: Create admin account in DB
+        env:
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run:
           python seed.py
 
