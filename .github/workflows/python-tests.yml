@@ -30,6 +30,10 @@ jobs:
           Start-Process python -ArgumentList '-m','uvicorn','app.main:app','--host','127.0.0.1','--port','8000'
           Start-Sleep -Seconds 10
 
+      - name: Create admin account in DB
+        run:
+          python seed.py
+
       - name: Start log server
         run: |
           python testing/utils/logs/log_server.py &
