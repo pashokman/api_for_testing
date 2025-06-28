@@ -12,7 +12,9 @@ def test_2_users_created_cars_admin_get_all_cars(setup_house_garage_car):
     c1 = car.create_car(user1, garage_id=g1.json().get("id"))
     c2 = car.create_car(user2)
 
-    user1_and_user2_cars = [x.json() for x in [c1, c2]]
+    c1_id = c1.json()["id"]
+    c2_id = c2.json()["id"]
     all_cars = car.get_my_cars(admin)
+    all_car_ids = [c["id"] for c in all_cars.json()]
 
-    assert all(elem in all_cars.json() for elem in user1_and_user2_cars)
+    assert {c1_id, c2_id}.issubset(set(all_car_ids))

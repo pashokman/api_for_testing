@@ -7,6 +7,7 @@ def test_delete_driver_licence_successfuly(setup):
     user, licence = setup
     licence.create_licence(user)
     licence.delete_licence(user)
+
     response = licence.get_my_licence(user)
 
     expected_status_code = 404

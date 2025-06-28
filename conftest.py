@@ -26,10 +26,10 @@ def pytest_sessionstart(session):
     # if os.path.exists(html_report):
     #     shutil.rmtree(html_report)
     #     os.makedirs(html_report)
-    resport_dir = "report"
-    if os.path.exists(resport_dir):
-        for filename in os.listdir(resport_dir):
-            file_path = os.path.join(resport_dir, filename)
+    report_dir = "report"
+    if os.path.exists(report_dir):
+        for filename in os.listdir(report_dir):
+            file_path = os.path.join(report_dir, filename)
             try:
                 if os.path.isfile(file_path) or os.path.islink(file_path):
                     os.unlink(file_path)

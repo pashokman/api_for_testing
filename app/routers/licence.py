@@ -48,8 +48,8 @@ def delete_my_driver_licence(db: Session = Depends(get_db), user: User = Depends
         raise HTTPException(status_code=404, detail="Driver licence not found")
 
     # Check if user is owner or admin
-    if user.user_id != licence.user_id and not bool(user.is_admin):
-        raise HTTPException(status_code=403, detail="Not allowed to delete this car")
+    if user.id != licence.user_id and not bool(user.is_admin):
+        raise HTTPException(status_code=403, detail="Not allowed to delete this licence")
 
     db.delete(licence)
     db.commit()

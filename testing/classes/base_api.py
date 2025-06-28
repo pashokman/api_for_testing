@@ -27,20 +27,20 @@ class BaseAPI:
     def put(self, endpoint: str, data=None, json=None, headers=None):
         url = f"{self.base_url}/{endpoint.lstrip('/')}"
         if self.logger:
-            self.logger.info(f"POST {url} json={json}, headers={headers}")
+            self.logger.info(f"PUT {url} json={json}, headers={headers}")
         response = requests.put(url, data=data, json=json, headers={**self.headers, **(headers or {})})
         return response
 
     def patch(self, endpoint: str, data=None, json=None, headers=None):
         url = f"{self.base_url}/{endpoint.lstrip('/')}"
         if self.logger:
-            self.logger.info(f"POST {url} json={json}, headers={headers}")
+            self.logger.info(f"PATCH {url} json={json}, headers={headers}")
         response = requests.patch(url, data=data, json=json, headers={**self.headers, **(headers or {})})
         return response
 
     def delete(self, endpoint: str, headers=None):
         url = f"{self.base_url}/{endpoint.lstrip('/')}"
         if self.logger:
-            self.logger.info(f"POST {url} headers={headers}")
+            self.logger.info(f"DELETE {url} headers={headers}")
         response = requests.delete(url, headers={**self.headers, **(headers or {})})
         return response

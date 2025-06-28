@@ -10,11 +10,15 @@ def test_admin_deletes_house_related_to_garage_related_to_car(setup_house_garage
     admin_house = house.create_house(admin)
     admin_garage = garage.create_garage(admin, house.house_id)
     admin_car = car.create_car(admin, garage.garage_id)
+    admin_house_id = admin_house.json()["id"]
+    admin_garage_id = admin_garage.json()["id"]
+    admin_car_id = admin_car.json()["id"]
 
     house.delete_house(admin)
 
     admin_houses = house.get_my_houses(admin)
-    assert admin_house.json() not in admin_houses.json()
+    admin_house_ids = [h["id"] for h in admin_houses.json()]
+    assert admin_house_id not in admin_house_ids
 
     admin_garages = garage.get_my_garages(admin).json()
     updated_garage = next((g for g in admin_garages if g["id"] == admin_garage.json()["id"]), None)
