@@ -3,23 +3,21 @@ from jsonschema import FormatChecker, validate
 import pytest
 
 
-@pytest.mark.user
+@pytest.mark.house
 @pytest.mark.schema
-def test_get_user_response_schema_validation(setup_user_create):
-    user = setup_user_create
-    user.auth()
-
+def test_create_house_response_schema_validation(setup):
+    user, house = setup
     expected_schema = {
         "type": "object",
         "properties": {
-            "username": {"type": "string"},
-            "email": {"type": "string", "format": "email"},
+            "title": {"type": "string"},
+            "address": {"type": "string"},
             "id": {"type": "string", "format": "uuid"},
-            "is_admin": {"type": "boolean"},
+            "owner_ids": {"type": "array", "items": {"type": "string", "format": "uuid"}},
         },
-        "required": ["username", "email", "id", "is_admin"],
+        "required": ["title", "address", "id", "owner_ids"],
     }
 
-    response = user.get_me()
+    response = house.create_house(user)
     assert response.ok, f"Unexpected status code: {response.status_code}, body: {response.text}"
     validate(instance=response.json(), schema=expected_schema, format_checker=FormatChecker())

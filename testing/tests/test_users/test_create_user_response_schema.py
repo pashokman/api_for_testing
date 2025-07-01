@@ -1,4 +1,4 @@
-from jsonschema import validate
+from jsonschema import FormatChecker, validate
 import pytest
 
 
@@ -10,7 +10,7 @@ def test_create_user_response_schema_validation(setup_user):
         "type": "object",
         "properties": {
             "username": {"type": "string"},
-            "email": {"type": "string"},
+            "email": {"type": "string", "format": "email"},
             "id": {"type": "string", "format": "uuid"},
             "is_admin": {"type": "boolean"},
         },
@@ -18,4 +18,5 @@ def test_create_user_response_schema_validation(setup_user):
     }
 
     response = user.create_user()
-    validate(instance=response.json(), schema=expected_schema)
+    assert response.ok, f"Unexpected status code: {response.status_code}, body: {response.text}"
+    validate(instance=response.json(), schema=expected_schema, format_checker=FormatChecker())
