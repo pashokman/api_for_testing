@@ -16,3 +16,4 @@ passlib
 pytest-rerunfailures
 allure-pytest
 pytest-html
+jsonschema

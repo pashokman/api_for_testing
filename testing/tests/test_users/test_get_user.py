@@ -2,9 +2,8 @@ from testing.utils.expected_objects_generator.expected_user_object_generator imp
 
 import pytest
 
-pytestmark = pytest.mark.user
 
-
+@pytest.mark.user
 def test_get_user_successfuly(setup_user_create):
     user = setup_user_create
     user.auth()
