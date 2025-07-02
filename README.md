@@ -1,6 +1,7 @@
 # api_for_testing
 I created this API to practice testing it and adding the most useful functionality, like:
 - environment variables;
+- response schema validation;
 - pytest run configuration in pytest.ini;
 - tests separation - pytest marks;
 - rerun functionality to avoid flacky tests;

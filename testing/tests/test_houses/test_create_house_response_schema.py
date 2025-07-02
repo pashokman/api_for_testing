@@ -1,4 +1,5 @@
-from jsonschema import FormatChecker, validate
+from testing.utils.assertions.status_ok_and_schema_validation import status_ok_and_schema_validation_check
+from testing.response_schemas.house_create import HOUSE
 
 import pytest
 
@@ -7,17 +8,7 @@ import pytest
 @pytest.mark.schema
 def test_create_house_response_schema_validation(setup):
     user, house = setup
-    expected_schema = {
-        "type": "object",
-        "properties": {
-            "title": {"type": "string"},
-            "address": {"type": "string"},
-            "id": {"type": "string", "format": "uuid"},
-            "owner_ids": {"type": "array", "items": {"type": "string", "format": "uuid"}},
-        },
-        "required": ["title", "address", "id", "owner_ids"],
-    }
+    expected_schema = HOUSE
 
     response = house.create_house(user)
-    assert response.ok, f"Unexpected status code: {response.status_code}, body: {response.text}"
-    validate(instance=response.json(), schema=expected_schema, format_checker=FormatChecker())
+    status_ok_and_schema_validation_check(response=response, expected_schema=expected_schema)

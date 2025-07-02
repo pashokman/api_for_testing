@@ -1,4 +1,6 @@
-from jsonschema import FormatChecker, validate
+from testing.utils.assertions.status_ok_and_schema_validation import status_ok_and_schema_validation_check
+from testing.response_schemas.user import USER
+
 import pytest
 
 
@@ -6,17 +8,8 @@ import pytest
 @pytest.mark.schema
 def test_create_user_response_schema_validation(setup_user):
     user = setup_user
-    expected_schema = {
-        "type": "object",
-        "properties": {
-            "username": {"type": "string"},
-            "email": {"type": "string", "format": "email"},
-            "id": {"type": "string", "format": "uuid"},
-            "is_admin": {"type": "boolean"},
-        },
-        "required": ["username", "email", "id", "is_admin"],
-    }
+
+    expected_schema = USER
 
     response = user.create_user()
-    assert response.ok, f"Unexpected status code: {response.status_code}, body: {response.text}"
-    validate(instance=response.json(), schema=expected_schema, format_checker=FormatChecker())
+    status_ok_and_schema_validation_check(response=response, expected_schema=expected_schema)
