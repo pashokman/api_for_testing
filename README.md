@@ -1,17 +1,19 @@
-# api_for_testing
-I created this API to practice testing it and adding the most useful functionality, like:
-- environment variables;
-- response schema validation;
-- pytest run configuration in pytest.ini;
-- tests separation - pytest marks;
-- rerun functionality to avoid flacky tests;
-- parallel run and logging into a single file;
-- reporting - Allure, html-report;
-- GitHub Actions run;
-- Docker build and run.
+# 🏗️ Advanced Python Automation Testing Framework
+This repository implements a robust and maintainable testing framework for REST APIs in Python, demonstrating best practices from real-world automation projects:  
+💻 Custom API implementation (FastAPI + seed data via seed.py) used as a controllable target for testing.  
+🧰 Pytest-based testing framework featuring fixtures, test categorization (smoke, regression, etc.), and advanced configuration via pytest.ini.  
+⚡ Parallel test execution with pytest-xdist and retries for flaky tests using pytest-rerunfailures.  
+🧬 Test data generation using Faker for dynamic, realistic inputs.  
+✅ API response validation via status code checks and schema validation with jsonschema.  
+🎭 Auth & role-based tests covering valid/invalid/expired tokens and roles (admin/user).  
+📊 Reporting: Allure & HTML reports with artifact integration.   
+📝 Centralized logging into a single file and optional separate logging server.   
+🚀 Dockerized setup for reproducible environments: includes both API server and testing suite.  
+🔁 CI/CD integration with GitHub Actions to run tests on every push or pull request.  
+⚙️ Environment configuration via environment variables and structured Docker Compose setup.  
 
 
-## Steps to run an API first
+## Steps to setup environment, API, logging
 1. Create virtual environment:
 ```
 python -m venv venv
@@ -60,4 +62,4 @@ docker-compose up --build
 ```
 
 
-Every time on pull/push request, test should run in GitHub Actions.
+Every time on pull/push request, test expected to run GitHub Actions.
