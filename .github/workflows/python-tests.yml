@@ -18,6 +18,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+
       - name: Start FastAPI app (Uvicorn)
         env:
           API_BASE_URL: http://127.0.0.1:8000/
@@ -42,6 +43,7 @@ jobs:
           sleep 2
         shell: bash
 
+
       - name: Run tests
         env:
           API_BASE_URL: http://127.0.0.1:8000/
@@ -52,6 +54,7 @@ jobs:
           INCORRECT_BEARER_TOKEN: ${{ secrets.INCORRECT_BEARER_TOKEN }}
         run: |
           pytest
+
 
       - name: Upload Allure Results
         if: always()
@@ -74,18 +77,21 @@ jobs:
           name: automation-log
           path: automation.log
 
+
       - name: Send Telegram notification on success
         if: success()
+        shell: bash
         run: |
-          curl -s -X POST https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage \
-            -d chat_id=${{ secrets.TG_CHAT_ID }} \
-            -d text="✅ Tests PASSED for *${{ github.repository }}*\n🔁 Commit: `${{ github.sha }}`" \
-            -d parse_mode=Markdown
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TG_CHAT_ID }}" \
+          -d "text=✅ Tests PASSED for *${{ github.repository }}*%0A🔁 Commit: \`${{ github.sha }}\`" \
+          -d "parse_mode=Markdown"
 
       - name: Send Telegram notification on failure
         if: failure()
+        shell: bash
         run: |
-          curl -s -X POST https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage \
-            -d chat_id=${{ secrets.TG_CHAT_ID }} \
-            -d text="❌ Tests FAILED for *${{ github.repository }}*\n🔁 Commit: `${{ github.sha }}`" \
-            -d parse_mode=Markdown
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_BOT_TOKEN }}/sendMessage" \
+          -d "chat_id=${{ secrets.TG_CHAT_ID }}" \
+          -d "text=❌ Tests FAILED for *${{ github.repository }}*%0A🔁 Commit: \`${{ github.sha }}\`" \
+          -d "parse_mode=Markdown"

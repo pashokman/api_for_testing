@@ -8,7 +8,8 @@ This repository implements a robust and maintainable testing framework for `REST
 🎭 Auth & role-based tests covering valid/invalid/expired tokens and roles (admin/user).  
 🛡️ Security tests for common vulnerabilities including `SQL Injection (SQLi)` and `Cross-site Scripting (XSS)` — tested via crafted malicious payloads.  
 📊 `Reporting: Allure & HTML reports` with artifact integration.   
-📝 `Centralized logging` into a single file and optional separate logging server.   
+📝 `Centralized logging` into a single file and optional separate logging server.  
+📩 `Telegram notifications`: Instant alerts about test results (passed or failed) are sent to a private chat via a custom bot using `GitHub Actions`.   
 🚀 `Dockerized setup` for reproducible environments: includes both API server and testing suite.  
 🔁 CI/CD integration with `GitHub Actions` to run tests on every push or pull request.  
 ⚙️ Environment configuration via environment variables and structured Docker Compose setup.  
