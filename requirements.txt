@@ -17,3 +17,4 @@ pytest-rerunfailures
 allure-pytest
 pytest-html
 jsonschema
+locust

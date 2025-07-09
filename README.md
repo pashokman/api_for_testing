@@ -10,9 +10,10 @@ This repository implements a robust and maintainable testing framework for `REST
 📊 `Reporting: Allure & HTML reports` with artifact integration.   
 📝 `Centralized logging` into a single file and optional separate logging server.  
 📩 `Telegram notifications`: Instant alerts about test results (passed or failed) are sent to a private chat via a custom bot using `GitHub Actions`.   
+📈 Load testing with `Locust`: Scenarios for performance, with parametrized user behavior and token-based auth support.  
 🚀 `Dockerized setup` for reproducible environments: includes both API server and testing suite.  
 🔁 CI/CD integration with `GitHub Actions` to run tests on every push or pull request.  
-⚙️ Environment configuration via environment variables and structured Docker Compose setup.  
+⚙️ Environment configuration via `environment variables` and structured Docker Compose setup.  
 
 
 ## Steps to setup environment, API, logging
@@ -63,5 +64,8 @@ allure serve allure-results
 docker-compose up --build
 ```
 
-
-Every time on pull/push request, test expected to run GitHub Actions.
+## To run Locust testing, made steps 1-5 and then run command and open Web UI for test configuration:
+```
+python -m locust -f testing/locust/user.py
+```
+Web UI address - `http://localhost:8089`
