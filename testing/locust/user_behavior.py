@@ -4,35 +4,39 @@ import os
 from locust import SequentialTaskSet, task
 from locust.exception import StopUser
 
+from testing.utils.generators.garage_generator import generate_garage
 from testing.utils.generators.user_generator import generate_user
 from testing.utils.generators.house_generator import generate_house
 from testing.utils.logs.locust_main_logger import Logger
 from testing.utils.logs.locust_response_err_log import response_err_log
 
-# clear log files
+# clear log files before each run
 for log_file in ["locust_main.log", "locust_only_error.log"]:
     if os.path.exists(log_file):
         with open(log_file, "w"):
             pass
 
+# connect logging
 log = Logger(log_name="UserBehavior")
 UserLog = log.get_logger()
 UserLog.propagate = False
 
 
 class UserBehavior(SequentialTaskSet):
-
+    # class describes user behavior with all api methods and some testing scenarios
     def on_start(self):
         self.user_obj = None
         self.user_id = None
         self.user_token = None
         self.house_ids = []
+        self.garage_ids = []
 
     def on_stop(self):
         self.user_obj = None
         self.user_id = None
         self.user_token = None
         self.house_ids = []
+        self.garage_ids = []
 
     def create_user(self):
         self.user_obj = generate_user(password_length=8)
@@ -74,9 +78,72 @@ class UserBehavior(SequentialTaskSet):
                 if response.status_code == 200:
                     house_id = response.json()["id"]
                     self.house_ids.append(house_id)
-                    UserLog.info(f'House created, house_id - "{house_id}", token - "{self.user_token}"')
+                    UserLog.info(f'House {i} created, house_id - "{house_id}", token - "{self.user_token}"')
                 else:
                     response_err_log(response)
+
+    def get_houses(self):
+        with self.client.get(
+            "/houses",
+            name="003. Get houses",
+            headers=self.headers,
+            catch_response=True,
+        ) as response:
+            if response.status_code == 200:
+                UserLog.info(f'Got houses - {response.text}, token - "{self.user_token}"')
+            else:
+                response_err_log(response)
+
+    def create_garages(
+        self, total_garage_count: int = 4, house1_related_garage_count: int = 1, house2_related_garage_count: int = 1
+    ):
+        if house1_related_garage_count + house2_related_garage_count > total_garage_count:
+            raise ValueError(
+                f"Invalid configuration: total_garage_count ({total_garage_count}) < house1_related_garage_count ({house1_related_garage_count}) + house2_related_garage_count ({house2_related_garage_count})"
+            )
+
+        def create_garage_request(index: int, house_id: str | None, relation: str):
+            garage = generate_garage()
+            if house_id:
+                garage["house_id"] = house_id
+
+            with self.client.post(
+                "/garages",
+                data=json.dumps(garage),
+                name=f"004. Create garage {index} related to {relation}",
+                headers=self.headers,
+                catch_response=True,
+            ) as response:
+                if response.status_code == 200:
+                    garage_id = response.json()["id"]
+                    self.garage_ids.append(garage_id)
+                    UserLog.info(
+                        f'Garage {index} created, garage_id = {garage_id}, house_id - "{garage["house_id"]}", token - "{self.user_token}"'
+                    )
+                else:
+                    response_err_log(response)
+
+        for i in range(house1_related_garage_count):
+            create_garage_request(i, self.house_ids[0], "house1")
+
+        for j in range(house1_related_garage_count):
+            create_garage_request(j, self.house_ids[1], "house2")
+
+        rest = total_garage_count - house1_related_garage_count - house2_related_garage_count
+        for k in range(rest):
+            create_garage_request(k, None, "no house")
+
+    def get_garages(self):
+        with self.client.get(
+            "/garages",
+            name="005. Get garages",
+            headers=self.headers,
+            catch_response=True,
+        ) as response:
+            if response.status_code == 200:
+                UserLog.info(f'Got garages - {response.text}, token - "{self.user_token}"')
+            else:
+                response_err_log(response)
 
     @task
     def test_scenario1(self):
@@ -85,18 +152,29 @@ class UserBehavior(SequentialTaskSet):
         001. Create user account
         002. Authorize user account
         003. Create N houses with user account token (N >= 2, default = 2)
-        004. Create M garages with user account token
+        004. Get all houses.
+        005. Create M garages with user account token (M >= 2, default = 3)
          - K garages belongs to house1 (K >= 1, default = 1)
          - L garages belongs to house2 (L >= 1, default = 1)
          - P garages without house relation (P = M - K - L). If M = 2, K = 1 and L = 1, P = 0. If M = 4, K = 1 and L = 1, P = 2
-        005. Create W cars with user account token
+        006. Get all garages.
+        007. Create W cars with user account token
          - X cars belongs to garage1 (X >= 1, default = 1)
          - Y cars belongs to garage2 (Y >= 1, default = 1)
          - Z cars without garage relation (Z = W - X - Y). If W = 2, X = 1 and Y = 1, Z = 0. If W = 4, X = 1 and Y = 1, Z = 2
-        006. Create driver licence with user account token
+        008. Get all cars.
+        009. Create driver licence with user account token
+        010. Get driver licence
+        011. Delete driver licence.
+        012. Delete each car.
+        013. Delete each garage.
+        014. Delete each house.
         """
         self.create_user()
         self.auth_user()
         self.create_houses()  # add getting variable from console
+        self.get_houses()
+        self.create_garages()  # add getting variables from console
+        self.get_garages()
 
         self.interrupt()
